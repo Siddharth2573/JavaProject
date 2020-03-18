@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane id="adDisAchPn" fx:id="adDisAchPn" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="300.0" prefWidth="400.0" style="-fx-background-color: #262626;" xmlns="http://javafx.com/javafx/8.0.241" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <Label id="adDisUserDetLabel" fx:id="adDisUserDetLabel" layoutX="156.0" layoutY="14.0" style="-fx-background-color: #262626;" text="USER DETAILS" textFill="#1fa9ff">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Label>
+      <TableView id="adminTable" fx:id="adminTable" layoutX="13.0" layoutY="41.0" prefHeight="248.0" prefWidth="373.0" style="-fx-background-color: #262626;">
+        <columns>
+          <TableColumn id="adminTableName" fx:id="adminTableName" prefWidth="124.0" style="-fx-background-color: #1fa9ff;" text="NAME" />
+          <TableColumn id="adminTableDOB" fx:id="adminTableDOB" prefWidth="124.0" style="-fx-background-color: #1fa9ff;" text="DOB" />
+            <TableColumn id="adminTableGender" fx:id="adminTableGender" prefWidth="125.0" style="-fx-background-color: #1fa9ff; " text="GENDER" />
+        </columns>
+      </TableView>
+   </children>
+</AnchorPane>
