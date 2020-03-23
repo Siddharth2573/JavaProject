@@ -1,6 +1,5 @@
 package application;
 
-import java.io.IOException;
 import java.net.URL;
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -63,12 +62,13 @@ public class detailsController {
     LocalDate DOB;
     String gender;
     String password;
+    byte [] salt;
+    byte [] hash;
     @FXML
     void initialize() {
     	ToggleGroup tgl=new ToggleGroup();
     	detailsMale.setToggleGroup(tgl);
     	detailsFemale.setToggleGroup(tgl);
-    	detailsMale.setSelected(true);
     	detailsMale.setOnAction(new EventHandler<ActionEvent>(){
           	public void handle(ActionEvent event) {
           		gender="M";
@@ -85,6 +85,9 @@ public class detailsController {
       		name=detailsNameTextField.getText();
       		password=detailsPassFld.getText();
             DOB=detailsDOB.getValue();
+            if(!detailsMale.isSelected() && !detailsFemale.isSelected()) gender="M";
+            salt=SaltGenerator.getSalt();
+            hash=HashGenerator.generateHash(password, salt);
             Stage stage=(Stage) detailsFinishBtn.getScene().getWindow();
             stage.close();
             try {
@@ -92,11 +95,17 @@ public class detailsController {
 				try {
 					Connection con=DriverManager.getConnection("jdbc:mysql://localhost:3306/javaproject","root","chowk1999");
 					PreparedStatement pmt=con.prepareStatement("INSERT INTO userdata VALUES(?,?,?)");
+					PreparedStatement pmt1=con.prepareStatement("INSERT INTO pssmanager VALUES(?,?,?)");
 					pmt.setString(1,name);
 					pmt.setString(2,gender);
 					pmt.setDate(3,java.sql.Date.valueOf(DOB));
+					pmt1.setString(1,name);
+					pmt1.setBytes(2, salt);
+					pmt1.setBytes(3,hash);
 					pmt.execute();
 					pmt.close();
+					pmt1.execute();
+					pmt1.close();
 				} catch (SQLException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
