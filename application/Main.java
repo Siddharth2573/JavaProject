@@ -13,7 +13,7 @@ public class Main extends Application {
 	public void start(Stage primaryStage) {
 		try {
 			primaryStage.getIcons().add(new Image("file:///C:/CodeRespiratory/jfx/src/images/icons8-search-pain-64.png"));
-			primaryStage.setTitle("SecureWithScan");
+			primaryStage.setTitle("Secure");
 			AnchorPane root = (AnchorPane)FXMLLoader.load(getClass().getResource("jfx.fxml"));
 			Scene scene = new Scene(root,600,400);
 			scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());

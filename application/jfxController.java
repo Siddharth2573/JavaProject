@@ -40,7 +40,7 @@ public class jfxController {
 	        	public void handle(ActionEvent event) {
 	        		Stage stg=new Stage();
 	        		stg.getIcons().add(new Image("file:///C:/CodeRespiratory/jfx/src/images/icons8-search-pain-64.png"));
-	    			stg.setTitle("SecureWithScan");
+	    			stg.setTitle("Secure");
 	    			AnchorPane myroot=new AnchorPane();
 					try {
 						myroot = (AnchorPane)FXMLLoader.load(getClass().getResource("details.fxml"));
@@ -48,7 +48,7 @@ public class jfxController {
 						// TODO Auto-generated catch block
 						e.printStackTrace();
 					}
-	        		Scene myscene = new Scene(myroot,416,343);
+	        		Scene myscene = new Scene(myroot,416,305);
 	    			myscene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
 	    			stg.setScene(myscene);
 	    			stg.show();
@@ -58,7 +58,7 @@ public class jfxController {
 	        	public void handle(ActionEvent event) {
 	        		Stage stg=new Stage();
 	        		stg.getIcons().add(new Image("file:///C:/CodeRespiratory/jfx/src/images/icons8-search-pain-64.png"));
-	    			stg.setTitle("SecureWithScan");
+	    			stg.setTitle("Secure");
 	    			AnchorPane myroot=new AnchorPane();
 					try {
 						myroot = (AnchorPane)FXMLLoader.load(getClass().getResource("oldDetails.fxml"));
@@ -66,7 +66,7 @@ public class jfxController {
 						// TODO Auto-generated catch block
 						e.printStackTrace();
 					}
-	        		Scene myscene = new Scene(myroot,400,218);
+	        		Scene myscene = new Scene(myroot,400,180);
 	    			myscene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
 	    			stg.setScene(myscene);
 	    			stg.show();
@@ -76,7 +76,7 @@ public class jfxController {
 	        	public void handle(ActionEvent event) {
 	        		Stage stg=new Stage();
 	        		stg.getIcons().add(new Image("file:///C:/CodeRespiratory/jfx/src/images/icons8-search-pain-64.png"));
-	    			stg.setTitle("SecureWithScan");
+	    			stg.setTitle("Secure");
 	    			AnchorPane myroot=new AnchorPane();
 					try {
 						myroot = (AnchorPane)FXMLLoader.load(getClass().getResource("admin.fxml"));
@@ -84,7 +84,7 @@ public class jfxController {
 						// TODO Auto-generated catch block
 						e.printStackTrace();
 					}
-	        		Scene myscene = new Scene(myroot,400,177);
+	        		Scene myscene = new Scene(myroot,400,130);
 	    			myscene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
 	    			stg.setScene(myscene);
 	    			stg.show();

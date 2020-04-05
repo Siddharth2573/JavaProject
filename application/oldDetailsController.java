@@ -37,9 +37,6 @@ public class oldDetailsController {
     private Label oldDetailsNameLabel;
 
     @FXML
-    private Button oldDetailsScanBtn;
-
-    @FXML
     private TextField oldDetailsNameTxtFld;
 
     @FXML
@@ -50,37 +47,35 @@ public class oldDetailsController {
 
     @FXML
     private Button oldDetailsFinishBtn;
+    
+    static String name;
+    static String password;
 
-    String name;
-    String password1;
-    byte [] salt;
-    byte [] hash;
     @FXML
     void initialize() {
-    	oldDetailsFinishBtn.setOnAction(new EventHandler<ActionEvent>(){
-          	public void handle(ActionEvent event) {
-          		name=oldDetailsNameTxtFld.getText();
-          		password1=oldDetailsPssFld.getText();
-                try {
-    				Class.forName("com.mysql.jdbc.Driver");
-    				try {
-    					Connection con=DriverManager.getConnection("jdbc:mysql://localhost:3306/javaproject","root","chowk1999");
-    					PreparedStatement pmt=con.prepareStatement("Select uname,salt,password from pssmanager where uname=(?)");
-    					pmt.setString(1,name);
-    					ResultSet rs=pmt.executeQuery();
-    					if(rs.next()) {
-    						salt=rs.getBytes("salt");
-    						hash=HashGenerator.generateHash(password1, salt);
-    						System.out.println(salt);
-    						System.out.println(hash);
-    						System.out.println(rs.getBytes("password"));
-    						if(hash==rs.getBytes("password")) {
-    							System.out.println("Succesfully logged in");
-        						Stage stage=(Stage) oldDetailsFinishBtn.getScene().getWindow();
+        oldDetailsFinishBtn.setOnAction(new EventHandler<ActionEvent>(){
+
+			@Override
+			public void handle(ActionEvent arg0) {
+				// TODO Auto-generated method stub
+				name=oldDetailsNameTxtFld.getText();
+				password=oldDetailsPssFld.getText();
+				try {
+					Class.forName("com.mysql.jdbc.Driver");
+					try {
+						Connection con=DriverManager.getConnection("jdbc:mysql://localhost:3306/javaproject","root","chowk1999");
+						PreparedStatement pmt=con.prepareStatement("Select password from pssmanager where uname=(?)");
+						pmt.setString(1,name);
+						ResultSet rs=pmt.executeQuery();
+						if(rs.next()) {
+							System.out.println("Succesfully Logged in");
+							if(password.equals(rs.getString("password"))) {
+								pmt.close();
+								Stage stage=(Stage) oldDetailsFinishBtn.getScene().getWindow();
         		                stage.close();
-        		            	Stage stg=new Stage();
+        		                Stage stg=new Stage();
         		        		stg.getIcons().add(new Image("file:///C:/CodeRespiratory/jfx/src/images/icons8-search-pain-64.png"));
-        		    			stg.setTitle("SecureWithScan");
+        		    			stg.setTitle("Secure");
         		    			AnchorPane myroot=new AnchorPane();
         						try {
         							myroot = (AnchorPane)FXMLLoader.load(getClass().getResource("jfx2.fxml"));
@@ -92,22 +87,29 @@ public class oldDetailsController {
         		    			myscene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
         		    			stg.setScene(myscene);
         		    			stg.show();
-    						}
-    						
-    					}
-    					else System.out.println("Unsuccesfull Log");
-    				
-    					
-    				} catch (SQLException e) {
-    					// TODO Auto-generated catch block
-    					e.printStackTrace();
-    				}
-    			} catch (ClassNotFoundException e1) {
-    				// TODO Auto-generated catch block
-    				e1.printStackTrace();
-    			}
-                
-        	}
+        		    			
+							}
+							else {
+								System.out.println("Wrong password");
+							}
+						}
+						else System.out.println("No such ID");
+						
+						
+					} catch (SQLException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+					
+				} catch (ClassNotFoundException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				
+				
+				
+			}
+        	
         });
 
     }

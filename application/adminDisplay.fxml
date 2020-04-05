@@ -7,7 +7,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane id="adDisAchPn" fx:id="adDisAchPn" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="300.0" prefWidth="400.0" style="-fx-background-color: #262626;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.adminDispalyController">
+<AnchorPane id="adDisAchPn" fx:id="adDisAchPn" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="300.0" prefWidth="400.0" style="-fx-background-color: #262626;" xmlns="http://javafx.com/javafx/8.0.241" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.adminDispalyController">
    <children>
       <Label id="adDisUserDetLabel" fx:id="adDisUserDetLabel" layoutX="156.0" layoutY="14.0" style="-fx-background-color: #262626;" text="USER DETAILS" textFill="#1fa9ff">
          <font>

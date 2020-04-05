@@ -1,6 +1,11 @@
 package application;
 
+import java.io.File;
+import java.io.IOException;
 import java.net.URL;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -53,15 +58,15 @@ public class detailsController {
     private PasswordField detailsPassFld;
 
     @FXML
-    private Button detailsScanButton;
-
-    @FXML
     private Label detailsPssLabel;
 
     String name;
     LocalDate DOB;
     String gender;
     String password;
+    StringBuilder prefix;
+    StringBuilder prefix1;
+    StringBuilder prefix2;
     byte [] salt;
     byte [] hash;
     @FXML
@@ -84,10 +89,22 @@ public class detailsController {
       	public void handle(ActionEvent event) {
       		name=detailsNameTextField.getText();
       		password=detailsPassFld.getText();
+      		prefix=new StringBuilder("C:\\Repository\\");
+      		prefix.append(name);
+      		prefix1=new StringBuilder(prefix.toString());
+      		prefix2=new StringBuilder(prefix.toString());
+      		File file = new File(prefix.toString());
+      		file.mkdir();
+      		prefix1.append("\\NEW_FILES");
+      		prefix2.append("\\PROTECTED");
+      		File add = new File(prefix1.toString());
+      		add.mkdir();
+      	    File pt=new File(prefix2.toString());
+      	    pt.mkdir();
             DOB=detailsDOB.getValue();
             if(!detailsMale.isSelected() && !detailsFemale.isSelected()) gender="M";
-            salt=SaltGenerator.getSalt();
-            hash=HashGenerator.generateHash(password, salt);
+            //salt=SaltGenerator.getSalt();
+            //hash=HashGenerator.generateHash(password, salt);
             Stage stage=(Stage) detailsFinishBtn.getScene().getWindow();
             stage.close();
             try {
@@ -95,17 +112,21 @@ public class detailsController {
 				try {
 					Connection con=DriverManager.getConnection("jdbc:mysql://localhost:3306/javaproject","root","chowk1999");
 					PreparedStatement pmt=con.prepareStatement("INSERT INTO userdata VALUES(?,?,?)");
-					PreparedStatement pmt1=con.prepareStatement("INSERT INTO pssmanager VALUES(?,?,?)");
+					PreparedStatement pmt1=con.prepareStatement("INSERT INTO pssmanager VALUES(?,?)");
+					PreparedStatement pmt2=con.prepareStatement("INSERT INTO file VALUES(?,?)");
 					pmt.setString(1,name);
 					pmt.setString(2,gender);
 					pmt.setDate(3,java.sql.Date.valueOf(DOB));
 					pmt1.setString(1,name);
-					pmt1.setBytes(2, salt);
-					pmt1.setBytes(3,hash);
+					pmt1.setString(2,password);
+					pmt2.setString(1,name);
+					pmt2.setString(2,prefix.toString());
 					pmt.execute();
 					pmt.close();
 					pmt1.execute();
 					pmt1.close();
+					pmt2.execute();
+					pmt2.close();
 				} catch (SQLException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
